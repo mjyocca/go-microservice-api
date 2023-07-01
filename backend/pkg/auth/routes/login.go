@@ -12,14 +12,14 @@ type Credentials struct {
 }
 
 func Login(c *fiber.Ctx) error {
+	// var user models.User
 
-	var creds Credentials
-
-	if err := c.BodyParser(&creds); err != nil {
+	var reqUser Credentials
+	if err := c.BodyParser(&reqUser); err != nil {
 		return err
 	}
 
-	fmt.Printf("\n%+v\n", creds)
+	fmt.Printf("\n%+v\n", reqUser)
 
 	return c.SendString("Hello, World!")
 }
