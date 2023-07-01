@@ -1,11 +1,21 @@
 package service
 
-import "github.com/mjyocca/go-auth/backend/pkg/auth/db"
+import (
+	"github.com/mjyocca/go-auth/backend/pkg/auth/db"
+	"github.com/mjyocca/go-auth/backend/pkg/auth/models"
+)
 
-type UserService struct {
-	Db db.Handler
+type UserService interface {
+	GetUser()
 }
 
-func (u *UserService) GetUser() {
+type userService struct {
+	handler db.Handler
+}
 
+func (u *userService) GetUser() {
+	var user models.User
+	if result := u.handler.DB.Where(&models.User{Email: ""}).First(&user); result.Error == nil {
+
+	}
 }

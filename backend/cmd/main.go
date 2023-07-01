@@ -9,7 +9,7 @@ import (
 	"github.com/mjyocca/go-auth/backend/pkg/auth"
 )
 
-func newFiber() *fiber.App {
+func newApp() *fiber.App {
 	app := fiber.New()
 	app.Use(logger.New())
 	app.Use(cors.New(cors.Config{
@@ -22,9 +22,11 @@ func newFiber() *fiber.App {
 
 func main() {
 
-	app := newFiber()
+	app := newApp()
 
-	auth.RegisterRoutes(app)
+	app.Get("/health")
+
+	auth.RegisterService(app)
 
 	if err := app.Listen(":8000"); err != nil {
 		fmt.Printf("%v", err)
